@@ -1,0 +1,21 @@
+
+#############################################
+#		spindle feedback from MS300 to ui
+#############################################
+
+## at speed signal to ui led
+net spindle-at-speed lcec.0.10.stat-at-speed => gmoccapy.spindle_at_speed_led
+## absolute rpm spindle speed to ui
+net spindle-fb-abs => gmoccapy.spindle_feedback_bar
+
+###################################
+#		Toolprobe gmoccapy
+###################################
+
+# link to gmoccapy toolchange, so you get the advantage of tool description on change dialog
+net tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
+net tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
+net tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
+net tool-prep-loop iocontrol.0.tool-prepare <= iocontrol.0.tool-prepared
+# displays the tool offset in gui "Tool information"
+net tooloffset-z gmoccapy.tooloffset-z <= motion.tooloffset.z

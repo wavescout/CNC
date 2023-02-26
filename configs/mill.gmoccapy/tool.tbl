@@ -1,0 +1,29 @@
+T0 P0 D2.000000 ;Probe 
+T1 P0 Z-30.046300 ;6mm_chamfer_mill_vhm 
+T2 P0 Z-15.102092 ;6mm_spot_drill 
+T3 P0 Z-25.457500 ;6x24mm_endmill_alu 
+T4 P0 Z-56.636100 ;8x17mm_endmill_3f 
+T5 P0 Z-6.764400 ;8x14mm_endmill_1f 
+T6 P0 Z-25.778400 ;4x11mm_endmill_4f_vhm 
+T7 P0 D4.980000 Z-61.158200 ;5x13mm_endmill_4f_vhm 
+T8 P0 Z-36.162900 ;6mm_ball_endmill_vhm 
+T9 P0 Z-129.450900 ;4x17mm_straight_flute_2f_vhm 
+T10 P0 Z-35.228900 ;6x51mm_staight_flute_2f_vhm 
+T11 P0 Z-50.708600 ;4x32mm_drill_vhm 
+T12 P0 Z-290.759600 ;5x20mm_drill_vhm 
+T13 P0 ;6mm_60°_engraver 
+T14 P0 Z-291.758600 ;M6_threadmill_vhm 
+T15 P0 Z-126.048700 ;14x28mm_endmill_3f 
+T16 P0 D6.000000 Z-19.281213 ;6x20xR0.5mm_endmill_3f_vhm 
+T17 P0 D6.000000 Z-137.516000 ;6x13mm_endmill_2f_vhm 
+T18 P0 Z-29.051100 ;3x15mm_drill_vhm 
+T19 P0 Z-33.973800 ;3x13mm_endmill_3f 
+T20 P0 Z-33.234300 ;2.5x15_drill_vm 
+T21 P0 Z-45.146100 ;M8x1.25_24mm_threadmill_5f 
+T22 P0 Z-13.614600 ;6.8x4mm_drill_2f_hss 
+T23 P0 Z-63.439600 ;M4_threadmill_vhm 
+T24 P0 Z-136.392900 ;M5_threadmill_vhm 
+T25 P0 Z-41.421490 ;2.5x4mm_endmill_3f 
+T33 P0 Z-69.754400 ;drill_3.3mm 
+T42 P0 Z-112.229200 ;drill_4.2mm 
+T99 P0 Z+7.770469 ;Random_drill 
