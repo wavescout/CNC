@@ -1,4 +1,4 @@
-o<wls> sub
+o<tool_length> sub
 
 ( - Talla83.de - Mai 2021 - )
 ( ACHTUNG DIE VERWENDUNG GESCHIEHT AUF EIGENE VERANTWORTUNG 					            )
@@ -32,12 +32,13 @@ o<wls> sub
 
 ( Sensorposition und sichere Z Position           )
 #1800=0 		        (Position sicheres Z      )
-#1801=0 	        (Position Taster X        )
+#1801=0 	        	(Position Taster X        )
 #1802=750		        (Position Taster Y        )
 #1803=-162.915	        (Sensors Referenzwert     )
 #1804=10		        (Vorschub messen fein     )
 #1805=500		        (Vorschub messen grob     )
 ( Merken welcher NP gerade aktiv ist              )
+#1900=#<_coord_system>	(NP merken nur G54 bis G58)
 #1900=#<_coord_system>	(NP merken nur G54 bis G58)
 ( G59.3 gleich dem G53 setzten                    )
 G10 L2 P9 X0 Y0 Z0      (Maschinenkoordinatensys. )
@@ -78,5 +79,5 @@ o103 endif
 o104 if[#1900 EQ 580]
 G58
 o104 endif
-o<wls> endsub [1]
+o<tool_length> endsub [1]
 M2

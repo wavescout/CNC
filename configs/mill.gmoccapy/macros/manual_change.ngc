@@ -1,4 +1,4 @@
-; manual toolchange with automatic tool length probe 
+; manual toolchange
 
 o<manual_change> sub
 ;(debug, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
@@ -17,10 +17,10 @@ O100     return [999]
 O100 endif
 
 ;first go up
-G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
+G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-1]
 ; then move to change position
 G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
-G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-1]
 
 ; cancel tool offset
 G49
@@ -57,7 +57,7 @@ O500 return [-3] ; indicate probe contact failure to epilog
 O500 endif
 
 G90
-G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-1]
 G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 
 #<touch_result> = #5063
