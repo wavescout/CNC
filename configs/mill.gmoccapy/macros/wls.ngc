@@ -1,0 +1,82 @@
+o<wls> sub
+
+( - Talla83.de - Mai 2021 - )
+( ACHTUNG DIE VERWENDUNG GESCHIEHT AUF EIGENE VERANTWORTUNG 					            )
+( Program zum WZ vermessen sofern mit der Werkzeugtabelle gearbeitet wird 			        )
+( Vorhanden sind Wergzeugmagazin bzw Werkzeugwechselspindel 					            )
+( Werkzeuglängensensor fest und unveränderlich verbaut 						                )
+( Schaltpunkt vom Werkzeuglängensensor bezüglich der Z Achse im G53 muss bekannt sein 		)
+( Bzw. muss der einmalig ermittelt werden, denn dieser Wert fließt dann in die Berechnung 	)
+( Die Ermittlung sollte mit der Spindelnase oder dem Nutenstein an der Spindel erfolgen 	)
+( Kurz gesagt vermessen wir diese und kennen damit die Z Position vom Sensor im G53 MKS 	)
+( - )
+( Vorbereitung Werkzeug laden)
+( Werkzeug wird zum Beispiel mit M6 G43 oder einen eigenen Programm eingewechselt 		    )
+( Die in der Werkzeugtabelle hinterlegte Länge in Z wird aktiviert auch wenn diese noch 0 ist)
+( - )
+( Anfang wls )
+( Koordinatensystem G59.3 also Nummer 9 komplett auf 0 setzen da G38 nicht im G53 funktioniert)
+( Durch die Nullung entspricht G59.3 dann G53 und wird können das somit umgehen 		    )
+( Der Nachteil ist das wir G59.3 nicht anderes verwenden dürfen da er hier immer genullt wird)
+( Sichere Z Position im G59.3 anfahren - muss für alle Werkzeuge kollisionsfrei passen 		)
+( Werkzeugsensorposition im G59.3 anfahren in X und Y 						                )
+( G38 Bewegung auf den Sensor nach Kontakt leicht abheben und nochmal langsam auf den Sensor)
+( Die der Z Wert wird nun mit dem einmalig ermittelten Z Wert verrechnet 				    )
+( Dieser Wert ist die aktuelle Werkzeuglänge 							                    )
+( Der Wert wird in die Werkzeugtabelle beim aktuell eingewechselten geschrieben 		    )
+( Die neuen Offsetdaten werden aktiviert 							                        )
+( Sichere Z Position im G59.3 anfahren - muss für alle Werkzeuge kollisionsfrei passen 		)
+( Ende wls )
+
+(DEBUG,T #<_current_tool> wird vermessen)
+
+( Sensorposition und sichere Z Position           )
+#1800=0 		        (Position sicheres Z      )
+#1801=0 	        (Position Taster X        )
+#1802=750		        (Position Taster Y        )
+#1803=-162.915	        (Sensors Referenzwert     )
+#1804=10		        (Vorschub messen fein     )
+#1805=500		        (Vorschub messen grob     )
+( Merken welcher NP gerade aktiv ist              )
+#1900=#<_coord_system>	(NP merken nur G54 bis G58)
+( G59.3 gleich dem G53 setzten                    )
+G10 L2 P9 X0 Y0 Z0      (Maschinenkoordinatensys. )
+G49		                 (Kompensation aus        )
+G90 G0 					(Fahre absolut)
+G59.3 Z#1800	   	         (Sichere Z Position  )	
+G59.3 X#1801 Y#1802  	     (Taster Position     )
+G91
+G59.3 G38.2 Z-200  F#1805     (messen grob         )
+G1    Z1.0  F#1805           (frei fahren         )	
+G38.2 Z-10  F#1804           (messen fein         )
+#2000=[#1803-#5063]	     (Referenzwert - Tastpunkt)
+#2000=[#2000 *-1]        (Vorzeichen tauschen     ) 
+
+(DEBUG, vermessene Laenge ist Z#2000)   
+
+G10 L1 P#<_current_tool> Z#2000	 (Wert in WZ-Tab  )
+
+(DEBUG,neue Laenge ist Z#2000)
+	 
+G1 Z5.0 F#1805                (frei fahren        )
+G90 G0
+G59.3 Z#1800	             (Sichere Z Position  )
+T#<_current_tool> G43    (Neue Werte aktivieren   )
+( Letzen NP wieder aktivieren G54 bis G58         )	
+o100 if[#1900 EQ 540]
+G54
+o100 endif
+o101 if[#1900 EQ 550]
+G55
+o101 endif
+o102 if[#1900 EQ 560]
+G56
+o102 endif
+o103 if[#1900 EQ 570]
+G57
+o103 endif
+o104 if[#1900 EQ 580]
+G58
+o104 endif
+o<wls> endsub [1]
+M2
