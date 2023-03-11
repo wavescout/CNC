@@ -1,0 +1,8 @@
+
+#############################################
+#		spindle feedback from MS300 to ui
+#############################################
+
+## vfd amps to spindle load bar
+net spindle-load spindle_load.bar_spindle_load
+

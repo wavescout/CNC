@@ -1,0 +1,29 @@
+; Spindle warmup cycle
+; Will run the spindle from 3k to 18k rps in 3000rpm steps per minute
+
+; the image path must be relative from your config dir or absolut, "~" is allowed
+;(IMAGE, ./macros/images/warmup.png)
+
+O<warmup> sub
+
+
+(MSG, Spindle warmup cycle started! 5 Minutes left...)
+M3 S6000
+G4 P60
+(MSG, 4 Minutes left...)
+G4 P60
+(MSG, 3 Minutes left...)
+G4 P30
+S12000
+G4 P30
+(MSG, 2 Minutes left...)
+G4 P60
+(MSG, 1 Minutes left...)
+G4 P30
+
+M5
+(MSG, Spindle warmup completed!)
+
+O<warmup> endsub
+
+M2

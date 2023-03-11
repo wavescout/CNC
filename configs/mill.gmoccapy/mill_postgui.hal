@@ -8,6 +8,7 @@ net spindle-at-speed lcec.0.10.stat-at-speed => gmoccapy.spindle_at_speed_led
 ## absolute rpm spindle speed to ui
 net spindle-fb-abs => gmoccapy.spindle_feedback_bar
 
+
 ###################################
 #		Toolprobe gmoccapy
 ###################################

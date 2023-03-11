@@ -244,9 +244,13 @@ net probe_touch or2.1.in1 <= lcec.0.1.din-7-not
 # combined output of both probes into motion.probe-input
 net probe_status or2.1.out => motion.probe-input
 
+#######################
+#	Spindle current display
+#######################
+loadrt scale count=1
 
-
-
-
-
+addf scale.0 servo-thread
+setp scale.0.gain 8
+net spindle-load-amp lcec.0.10.act-current => scale.0.in
+net spindle-load scale.0.out
 

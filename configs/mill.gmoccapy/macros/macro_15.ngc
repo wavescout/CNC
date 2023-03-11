@@ -1,24 +1,12 @@
-; Testfile go to position
-; will jog the machine to a position to give
+o<macro_15> sub
 
-O<macro_15> sub
 
-G17
-G21
-G54
-G61
-G40
-G49
-G80
-G90
 
-;#1 = <X-Pos>
-;#2 = <Y-Pos>
-;#3 = <Z-Pos>
+M5
+(MSG, Test cycle started! 5 Seconds left...)
+G4 P1
+(MSG, 4 Seconds left...)
 
-(DBG, Will now move machine to X = #1 , Y = #2 , Z = #3)
-G0 X #1 Y #2 Z #3
-
-O<macro_15> endsub
+o<macro_15> endsub
 
 M2
